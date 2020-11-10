@@ -45,7 +45,7 @@
 ### Associations
   -belongs_to :user
   -belongs_to :item
-  -has_one :Addresses
+  -has_one :addresses
 
 
 ## Addressesテーブル
