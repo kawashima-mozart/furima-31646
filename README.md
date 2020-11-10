@@ -1,6 +1,6 @@
 # テーブル設計
 
-## userテーブル
+## usersテーブル
 
 | Column             | TYpe   | Options     |
 | ------------------ | ------ | ----------- |
@@ -13,11 +13,11 @@
 | first_name_kana    | string | null: false |
 | birthday           | date   | null: false |
 
-### Association
-  -has_many :items dependent::destroy
+### Associations
+  -has_many :items 
   -has_many :purchases
 
-## itemテーブル
+## itemsテーブル
 
 | Column             | TYpe       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
@@ -29,13 +29,26 @@
 | shipment_source_id | integer    | null: false                    |
 | day_of_shipment_id | integer    | null: false                    |
 | price              | integer    | null: false                    |
-| user           | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
-### Association
+### Associations
   -belongs_to :user
   -has_one :purchase 
 
 ## Purchaseテーブル
+
+| Column | TYpe       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+### Associations
+  -belongs_to :user
+  -belongs_to :item
+  -has_one :purchase 
+
+
+## Addressesテーブル
 
 | Column        | TYpe       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -45,9 +58,7 @@
 | address       | string     | null: false                    |
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
-| item          | references | null: false, foreign_key: true |
+| purchase      | references | null: false, foreign_key: true |
 
-### Association
-  -belongs_to :user
-  -belongs_to :item
+### Associations
+  -belongs_to :purchase
