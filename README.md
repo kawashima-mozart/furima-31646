@@ -2,16 +2,16 @@
 
 ## usersテーブル
 
-| Column             | TYpe   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| last_name_chn      | string | null: false |
-| first_name_chn     | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birthday           | date   | null: false |
+| Column             | TYpe   | Options                  |
+| ------------------ | ------ | ------------------------ |
+| nickname           | string | null: false              |
+| email              | string | null: false ,unique: true|
+| encrypted_password | string | null: false              |
+| last_name_chn      | string | null: false              |
+| first_name_chn     | string | null: false              |
+| last_name_kana     | string | null: false              |
+| first_name_kana    | string | null: false              |
+| birthday           | date   | null: false              |
 
 ### Associations
   -has_many :items 
@@ -22,7 +22,7 @@
 | Column             | TYpe       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | name               | string     | null: false                    |
-| text               | string     | null: false                    |
+| text               | text       | null: false                    |
 | category_id        | integer    | null: false                    |
 | status_id          | integer    | null: false                    |
 | shipping_id        | integer    | null: false                    |
@@ -45,7 +45,7 @@
 ### Associations
   -belongs_to :user
   -belongs_to :item
-  -has_one :purchase 
+  -has_one :Addresses
 
 
 ## Addressesテーブル
