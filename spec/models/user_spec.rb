@@ -78,23 +78,35 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name chn can't be blank")
       end
-      it '名字と名前が半角英語のとき' do
+      it '名字が半角英語のとき' do
         @user.last_name_chn = 'test'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name chn  is invalid.')
+      end
+      it '名字が半角数字のとき' do
+        @user.last_name_chn = '111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name chn  is invalid.')
+      end
+      it '名字が全角数字のとき' do
+        @user.last_name_chn = '１１１'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name chn  is invalid.')
+      end
+      it '名前が半角英語のとき' do
         @user.first_name_chn = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name chn  is invalid.', 'First name chn  is invalid.')
+        expect(@user.errors.full_messages).to include('First name chn  is invalid.')
       end
-      it '名字と名前が半角数字のとき' do
-        @user.last_name_chn = '111'
+      it '名前が半角数字のとき' do
         @user.first_name_chn = '111'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name chn  is invalid.', 'First name chn  is invalid.')
+        expect(@user.errors.full_messages).to include('First name chn  is invalid.')
       end
-      it '名字と名前が全角数字のときでの入力であること' do
-        @user.last_name_chn = '１１１'
+      it '名前が全角数字のとき' do
         @user.first_name_chn = '１１１'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name chn  is invalid.', 'First name chn  is invalid.')
+        expect(@user.errors.full_messages).to include('First name chn  is invalid.')
       end
       it 'フリガナで、名字が空欄のとき' do
         @user.last_name_kana = nil
@@ -106,35 +118,56 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
-      it 'フリガナが、半角英語のとき' do
+      it '名字のフリガナが、半角英語のとき' do
         @user.last_name_kana = 'test'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana  is invalid.')
+      end
+      it '名字のフリガナが、半角数字のとき' do
+        @user.last_name_kana = '111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana  is invalid.')
+      end
+      it '名字のフリガナが、全角数字のとき' do
+        @user.last_name_kana = '１１１'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana  is invalid.')
+      end
+      it '名字のフリガナが、全角漢字のとき' do
+        @user.last_name_kana = '亜衣兎'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana  is invalid.')
+      end
+      it '名字のフリガナが、全角ひらがなのとき' do
+        @user.last_name_kana = 'あああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana  is invalid.')
+      end
+
+      it '名前のフリガナが、半角英語のとき' do
         @user.first_name_kana = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana  is invalid.', 'First name kana  is invalid.')
+        expect(@user.errors.full_messages).to include('First name kana  is invalid.')
       end
-      it 'フリガナが、半角数字のとき' do
-        @user.last_name_kana = '111'
+      it '名前のフリガナが、半角数字のとき' do
         @user.first_name_kana = '111'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana  is invalid.', 'First name kana  is invalid.')
+        expect(@user.errors.full_messages).to include('First name kana  is invalid.')
       end
-      it 'フリガナが、全角数字のとき' do
-        @user.last_name_kana = '１１１'
+      it '名前のフリガナが、全角数字のとき' do
         @user.first_name_kana = '１１１'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana  is invalid.', 'First name kana  is invalid.')
+        expect(@user.errors.full_messages).to include('First name kana  is invalid.')
       end
-      it 'フリガナが、全角漢字のとき' do
-        @user.last_name_kana = '亜衣兎'
+      it '名前のフリガナが、全角漢字のとき' do
         @user.first_name_kana = '亜衣兎'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana  is invalid.', 'First name kana  is invalid.')
+        expect(@user.errors.full_messages).to include('First name kana  is invalid.')
       end
-      it 'フリガナが、全角ひらがなのとき' do
-        @user.last_name_kana = 'あああ'
+      it '名前のフリガナが、全角ひらがなのとき' do
         @user.first_name_kana = 'あああ'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana  is invalid.', 'First name kana  is invalid.')
+        expect(@user.errors.full_messages).to include('First name kana  is invalid.')
       end
       it '生年月日が空欄のとき' do
         @user.birthday = nil
