@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to :shipping
   belongs_to :shipment_source
   belongs_to :day_of_shipment
+  has_one_attached :image
 
   with_options presence: true do
     validates :category, numericality: { other_than: 1 }
