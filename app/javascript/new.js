@@ -13,3 +13,4 @@ function priceContent(){
 });
 }
 if(document.URL.match('/items/new')){window.addEventListener('load', priceContent)}
+if(document.URL.match('/items/.+/edit')){window.addEventListener('load', priceContent)}
