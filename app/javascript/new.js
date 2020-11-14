@@ -12,4 +12,4 @@ function priceContent(){
     profit.innerHTML = `${ profitCalculation }`;
 });
 }
-window.addEventListener('load', priceContent)
+if(document.URL.match('/items/new')){window.addEventListener('load', priceContent)}
