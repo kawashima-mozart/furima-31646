@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   before_action :sold_out_check
   def index
     @item_order = ItemOrder.new
-    
   end
 
   def create
@@ -22,23 +21,22 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:item_order).permit(:postal_code, :shipment_source_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
-  
+
   def move_to_index
     redirect_to new_user_session_path unless user_signed_in?
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: order_params[:token],
-        currency: 'jpy'
-      )
-    end
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
+  end
 
   def sold_out_check
     @item = Item.find(params[:item_id])
     redirect_to root_path if @item.order.present? || @item.user.id == current_user.id
   end
-
 end

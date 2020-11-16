@@ -3,10 +3,8 @@ require 'rails_helper'
 RSpec.describe ItemOrder, type: :model do
   describe '購入情報と住所情報が登録' do
     before do
-    @item_order = FactoryBot.build(:item_order)
+      @item_order = FactoryBot.build(:item_order)
     end
-
-  
 
     context '登録できるとき' do
       it 'すべての数値が入っていれば保存できる' do

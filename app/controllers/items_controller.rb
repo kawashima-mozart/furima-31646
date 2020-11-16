@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :sold_out_check, only: [:edit, :update, :destroy]
   def index
-    @items = Item.includes(:user,:order).order('created_at DESC')
+    @items = Item.includes(:user, :order).order('created_at DESC')
   end
 
   def new
@@ -57,5 +57,4 @@ class ItemsController < ApplicationController
   def sold_out_check
     redirect_to root_path if @item.order.present? || @item.user.id == current_user.id
   end
-
 end
