@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :move_to_index
   before_action :sold_out_check
+  before_action :move_to_index
   def index
     @item_order = ItemOrder.new
   end
