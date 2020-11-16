@@ -1,17 +1,13 @@
 class OrdersController < ApplicationController
   before_action :move_to_index
-
+  before_action :sold_out_check
   def index
-    @item = Item.find(params[:item_id])
     @item_order = ItemOrder.new
-    redirect_to root_path if @item.user.id == current_user.id
+    
   end
 
   def create
-    binding.pry
-    @item = Item.find(params[:item_id])
     @item_order = ItemOrder.new(order_params)
-    redirect_to root_path if @item.user_id == current_user.id
     if @item_order.valid?
       pay_item
       @item_order.save
@@ -38,6 +34,11 @@ class OrdersController < ApplicationController
         card: order_params[:token],
         currency: 'jpy'
       )
+    end
+
+  def sold_out_check
+    @item = Item.find(params[:item_id])
+    redirect_to root_path if @item.order.present? || @item.user.id == current_user.id
   end
 
 end
