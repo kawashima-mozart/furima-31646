@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :sold_out_check
   before_action :move_to_index
-  before_action :orner_move_index
+  before_action :owner_move_index
 
   def index
     @item_order = ItemOrder.new
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     )
   end
 
-  def orner_move_index
+  def owner_move_index
     redirect_to root_path if @item.user.id == current_user.id
   end
 
