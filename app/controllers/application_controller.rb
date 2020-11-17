@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :basic_auth
+  before_action :basic_auth if Rails.env.production? 
   before_action :configure_permitted_paraneters, if: :devise_controller?
 
   private
