@@ -35,7 +35,7 @@
   -belongs_to :user
   -has_one :purchase 
 
-## Purchaseテーブル
+## Ordersテーブル
 
 | Column | TYpe       | Options                        |
 | ------ | ---------- | ------------------------------ |
@@ -50,15 +50,15 @@
 
 ## Addressesテーブル
 
-| Column        | TYpe       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| postal_code   | string     | null: false                    |
-| prefecture_id | integer    | null: false                    |
-| city          | string     | null: false                    |
-| address       | string     | null: false                    |
-| building_name | string     |                                |
-| phone_number  | string     | null: false                    |
-| purchase      | references | null: false, foreign_key: true |
+| Column             | TYpe       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| postal_code        | string     | null: false                    |
+| shipment_source_id | integer    | null: false                    |
+| city               | string     | null: false                    |
+| address            | string     | null: false                    |
+| building_name      | string     |                                |
+| phone_number       | string     | null: false                    |
+| order              | references | null: false, foreign_key: true |
 
 ### Associations
-  -belongs_to :purchase
+  -belongs_to :order
