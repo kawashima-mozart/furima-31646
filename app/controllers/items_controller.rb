@@ -55,6 +55,6 @@ class ItemsController < ApplicationController
   end
 
   def sold_out_check
-    redirect_to root_path if @item.order.present? || @item.user.id == current_user.id
+    redirect_to root_path if @item.order.present?
   end
 end
